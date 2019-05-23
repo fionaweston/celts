@@ -6,7 +6,7 @@ has same names as the endpoints
 console.log("--> mock.js");
 
 
-function getAgencies(){
+function getAgenciesMock(){
     /* Returns the mock data of the agencies
 
     Accepts : nothing
@@ -96,3 +96,75 @@ function getAgencies(){
     return agencies;
 }
 
+
+function getAgencyDetailsMock(agencyID, filterYear){
+    /* Returns the details for the agency provided
+
+    Accepts : agencyID: (string) unique identifier for the agency
+              filterYear: (int) year in which to get the details for
+
+    Returns : (dictionary) details on the agency
+                id: (string) unique identifier for the agency the details are for
+                year: (int) year for which the agency details are for
+                summarydayofweek: (List)
+                    day: (string) Day of week; 0 Monday, 1 Tuesday, 2 Wednesday, 3 Thursday, 4 Friday, 5 Saturday, 6 Sunday
+                    count: (int)
+                summaryhour: (List)
+                    hour: (string)
+                    count: (int)
+                meters: (list) List of the top meters, by count, for the agency
+                    location: (string)
+                    id: (string)
+                    count: (int)
+                    latitude: (number)
+                    longitude: (number)
+    */
+
+    return {
+        "id": agencyID,
+        "year": filterYear,
+        "summarydayofweek": [
+            { "day": 0, "count": 18902},
+            { "day": 1, "count": 21001},
+            { "day": 2, "count": 19498},
+            { "day": 3, "count": 19912},
+            { "day": 4, "count": 22785},
+            { "day": 5, "count": 2223},
+            { "day": 5, "count": 10350}
+        ],
+        "summaryhour": [
+            { "hour": 0, "count": 0},
+            { "hour": 1, "count": 0},
+            { "hour": 2, "count": 0},
+            { "hour": 3, "count": 0},
+            { "hour": 4, "count": 0},
+            { "hour": 5, "count": 0},
+            { "hour": 6, "count": 0},
+            { "hour": 7, "count": 0},
+            { "hour": 8, "count": 3925},
+            { "hour": 9, "count": 4663},
+            { "hour": 10, "count": 7875},
+            { "hour": 11, "count": 14631},
+            { "hour": 12, "count": 13831},
+            { "hour": 13, "count": 12644},
+            { "hour": 14, "count": 11259},
+            { "hour": 15, "count": 7858},
+            { "hour": 16, "count": 11146},
+            { "hour": 17, "count": 11286},
+            { "hour": 18, "count": 6641},
+            { "hour": 19, "count": 8689},
+            { "hour": 20, "count": 1112},
+            { "hour": 21, "count": 701},
+            { "hour": 22, "count": 512},
+            { "hour": 23, "count": 329},
+        ],
+        "meters": [
+            {"location": "1608 PACIFIC AVE S",
+            "id": "123ID",
+            "count": 50,
+            "latitude": 6418525.8,
+            "longitude": 1818220.6
+            }
+        ]
+    };
+}
