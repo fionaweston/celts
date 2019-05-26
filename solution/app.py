@@ -33,6 +33,7 @@ AgencySummary = Base.classes.AgencySummary
 AgencyDayOfWeekSummary=Base.classes.AgencyDayOfWeekSummary
 AgencyTimeOfDaySummary=Base.classes.AgencyTimeOfDaySummary
 AgencyTopMeters=Base.classes.AgencyTopMeters
+MeterDetails=Base.classes.MeterDetails
 
 @app.route("/")
 def index():
@@ -42,7 +43,7 @@ def index():
 
 @app.route("/getAgencies")
 def agency():
-    """Return a list of sample names."""
+    
 
     # Use Pandas to perform the sql query
     stmt_meta = db.session.query(Agency).statement
@@ -55,8 +56,7 @@ def agency():
     agency_metadata=[]
     for i in range(df_meta.shape[0]):
         m_dict={}
-        # m_dict["name"]=df_meta.iloc[i,1]
-        
+       
         m_dict["name"]=df_meta.iloc[i,0]
         m_dict["id"]=str(df_meta.iloc[i,1])
 
@@ -74,7 +74,7 @@ def agency():
 
 @app.route("/getAgencyDetails/<id>/<year>")
 def agencyDetails(id=None,year=None):
-    """Return a list of sample names."""
+    
 
     # Use Pandas to perform the sql query
     
@@ -127,6 +127,35 @@ def agencyDetails(id=None,year=None):
     
 
     return jsonify(agency_details)
+
+@app.route("/getMeterDetails/<id>/<year>")
+def meterDetails(id=None,year=None):
+    
+
+    # Use Pandas to perform the sql query
+    
+    stmt_md = db.session.query(MeterDetails).\
+        filter_by(MeterID=id).filter_by(Year=year).statement
+    df_md = pd.read_sql_query(stmt_md, db.session.bind)
+    
+
+    
+    meter_details={}    
+        
+    meter_details["year"]=int(year)
+    meter_details["id"]=str(id)
+
+    summary_make=[]
+    for j in range(df_md.shape[0]):
+        summary_dict={}
+        summary_dict["count"]=int(df_md.iloc[j,5])
+        summary_dict["vehiclemake"]=str(df_md.iloc[j,4])
+        summary_make.append(summary_dict)
+    meter_details["summarymake"]=summary_make
+
+    
+
+    return jsonify(meter_details)
 
 if __name__ == "__main__":
     app.run()
