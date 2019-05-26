@@ -26,7 +26,7 @@ function getAgenciesMock(){
     agencies.push(
         {
             "name": "Western",
-            "id": 51,
+            "id": "51",
             "summarycount" : [
                 { "count": 117093, "year": 2015 },
                 { "count": 107351, "year": 2016 },
@@ -40,7 +40,7 @@ function getAgenciesMock(){
     agencies.push(
         {
             "name": "Valley",
-            "id": 53,
+            "id": "53",
             "summarycount" : [
                 { "count": 78455, "year": 2015 },
                 { "count": 72247, "year": 2016 },
@@ -54,7 +54,7 @@ function getAgenciesMock(){
     agencies.push(
         {
             "name": "Hollywood",
-            "id": 54,
+            "id": "54",
             "summarycount" : [
                 { "count": 110532, "year": 2015 },
                 { "count": 98576, "year": 2016 },
@@ -68,7 +68,7 @@ function getAgenciesMock(){
     agencies.push(
         {
             "name": "Southern",
-            "id": 55,
+            "id": "55",
             "summarycount" : [
                 { "count": 7389, "year": 2015 },
                 { "count": 6665, "year": 2016 },
@@ -82,7 +82,7 @@ function getAgenciesMock(){
     agencies.push(
         {
             "name": "Central",
-            "id": 56,
+            "id": "56",
             "summarycount" : [
                 { "count": 124570, "year": 2015 },
                 { "count": 117549, "year": 2016 },

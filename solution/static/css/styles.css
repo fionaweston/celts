@@ -1,0 +1,32 @@
+
+
+/*  District Filter: Rectangle */
+.districtFilterRectangle {
+    fill: none;
+    stroke: black;
+    stroke-width: 3;
+}
+
+.districtFilterRectangleMouseOver {
+    fill: rgb(138, 194, 204);
+    stroke: black;
+    stroke-width: 3;
+}
+
+
+
+
+/* District Filter: Label Text
+Text used with the name of the district */
+.districtFilterLabelText {
+    font-family: sans-serif;
+    font-size: 15px;
+}
+
+
+/* District Filter: Count Text
+Text used with the count of citations within the district */
+.districtFilterCountText {
+    font-family: sans-serif;
+    font-size: 22px;
+}

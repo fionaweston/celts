@@ -21,6 +21,8 @@ console.log(testAgencyDetails);
 
 
 //- Initialize Charts
+initializeDistrictFilter(testAgencies, 2018);
+
 initializeDowChart(testAgencyDetails);
 
 initializeTimeDayChart(testAgencyDetails);
