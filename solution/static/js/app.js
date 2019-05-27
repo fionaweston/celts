@@ -191,6 +191,25 @@ function updateAgencyDetails(sourceAgencyDetails){
     updateMap(sourceAgencyDetails);
 }
 
+function makeResponsiveLayout(){
+    /*
+
+    Accepts : nothing
+
+    Returns : undefined
+    */
+
+    console.log("-> makeResponsiveLayout");
+
+
+    //TODO: update for responsive design
+
+}
+
+
+//- Prepare Responsive Layout
+d3.select(window).on("resize",makeResponsiveLayout);
+
 
 //- Initialize Application
 initializeApp("53", 2018);
