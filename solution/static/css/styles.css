@@ -5,15 +5,22 @@
     fill: none;
     stroke: black;
     stroke-width: 3;
+    pointer-events: all;
 }
 
 .districtFilterRectangleMouseOver {
-    fill: rgb(138, 194, 204);
+    fill: rgba(131, 199, 211, 0.342);
     stroke: black;
     stroke-width: 3;
+    pointer-events: all;
 }
 
-
+.districtFilterRectangleSelected {
+    fill: rgba(91, 174, 230, 0.87);
+    stroke: rgb(66, 68, 230);
+    stroke-width: 7;
+    pointer-events: all;
+}
 
 
 /* District Filter: Label Text
@@ -21,6 +28,7 @@ Text used with the name of the district */
 .districtFilterLabelText {
     font-family: sans-serif;
     font-size: 15px;
+    pointer-events: none;
 }
 
 
@@ -29,4 +37,5 @@ Text used with the count of citations within the district */
 .districtFilterCountText {
     font-family: sans-serif;
     font-size: 22px;
+    pointer-events: none;
 }

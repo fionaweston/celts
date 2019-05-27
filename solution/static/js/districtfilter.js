@@ -13,12 +13,20 @@ const DISTRICTFILTER_BoxHeight = 60;   //height of the district boxes
 
 const DISTRICTFILTER_TopMargin = 5; // Margin at the top of the SVG
 
-//- Globals
+const DISTRICTFILTER_BoxMargin = 10; // Margin between
+
+const DISTRICTFILTER_SelectedClass = "districtFilterRectangleSelected"; // name of the CSS class for selected rectangle
+
+const DISTRCITFILTER_MouseOverClass = "districtFilterRectangleMouseOver"; // name of the CSS class for hover rectangle
+
+const DISTRICTFILTER_UnselectedClass = "districtFilterRectangle"; // name of CSS class for standard rectangle
 
 
 
-function initializeDistrictFilter(sourceAgencies, selectedYear){
-    /*
+
+
+function initializeDistrictFilter(sourceAgencies, selectedYear, selectAgencyID){
+    /* Creates the SVG that contains the district filter.
 
     Accepts : sourceAgencies (list) all of the dictionary items with agency information
                 name: (string) display name of agency
@@ -27,24 +35,10 @@ function initializeDistrictFilter(sourceAgencies, selectedYear){
                     count: (int) number of records for the year
                     year: (int) year which the count is for
               selectedYear: (int) year that is to be displayed
+              selectedAgencyID: (string) unique identifier for the agency
 
     Returns : undefined
     */
-
-
-
-
-/*
-
-create a new object that is to be data bound to control
-1 has the location
-able to create the .enter to dynamic create
-use the function part to set the XY of locations
-use selected year to know which one to use
-
-
-*/
-
 
    console.log("--> initializeDistrictFilter");
 
@@ -62,16 +56,17 @@ use selected year to know which one to use
     //- Get Width
     let svgWidth = getDistrictFilterDivWidth();
 
-     
+    let svgHeight = ((DISTRICTFILTER_BoxHeight * 3) + (DISTRICTFILTER_TopMargin * 2) + (DISTRICTFILTER_BoxMargin * 2));
+
 
     //-- Create SVG Container
     let svgContainer = d3.select(DISTRICTFILTER_DIVNAME).append('svg')
-        .attr("height", 300)
+        .attr("height", svgHeight)
         .attr("width", svgWidth);
 
 
     //-
-    let filterBoxWidth = (svgWidth * 0.4);
+    let filterBoxWidth = (svgWidth * 0.4) - DISTRICTFILTER_BoxMargin;
 
     //- Prepare Data
     let filterData = prepareDistrictData(sourceAgencies, svgWidth, filterBoxWidth);
@@ -87,7 +82,16 @@ use selected year to know which one to use
                             .attr("y", item => item["y"])
                             .attr("width", filterBoxWidth)
                             .attr("height", DISTRICTFILTER_BoxHeight)
-                            .attr("class", "districtFilterRectangle")
+                            .attr("class", item => {
+                               if (item["agency"]["id"] == selectAgencyID){
+                                    return DISTRICTFILTER_SelectedClass;
+                               }
+                               else
+                               {
+                                    return DISTRICTFILTER_UnselectedClass;
+                               }
+                            })
+                            .attr("agencyid", item => item["agency"]["id"])
                             .on("click", districtFilterClick)
                             .on("mouseover", districtFilterMouseOver)
                             .on("mouseout", districtFilterMouseOut);
@@ -104,8 +108,7 @@ use selected year to know which one to use
                             .attr("class", "districtFilterLabelText")
                             .attr("text-anchor", "middle")
                             .attr("fill", "black")
-                            .text(item => item["agency"]["name"])
-                            .on("click", districtFilterClick);
+                            .text(item => item["agency"]["name"]);
 
     
     //- Create Count Text
@@ -120,11 +123,8 @@ use selected year to know which one to use
                             .attr("text-anchor", "middle")
                             .attr("fill", "black")
                             .attr("class", "districtFilterCountText")
-                            .text(item => getDistrictCountForYear(item, selectedYear))
-                            .on("click", districtFilterClick);
-
-
-
+                            .text(item => getDistrictCountForYear(item, selectedYear));
+                            
 }
 
 function getDistrictCountForYear(sourceAgency, selectedYear){
@@ -175,29 +175,29 @@ function prepareDistrictData(sourceAgencies, svgWidth, filterRectWidth){
 
     //- Western
     agencyControlData.push({
-        "x": (svgWidth * 0.1),
-        "y": (DISTRICTFILTER_BoxHeight + DISTRICTFILTER_TopMargin),
+        "x": (svgWidth * 0.1) - (DISTRICTFILTER_BoxMargin / 2),
+        "y": (DISTRICTFILTER_BoxHeight + DISTRICTFILTER_TopMargin + DISTRICTFILTER_BoxMargin),
         "agency": sourceAgencies.filter(item => {return item["id"] == '51';})[0]
     });
 
     //- Hollywood
     agencyControlData.push({
-        "x": ((svgWidth * 0.1) + filterRectWidth),
-        "y": (DISTRICTFILTER_BoxHeight + DISTRICTFILTER_TopMargin),
+        "x": ((svgWidth * 0.1) + filterRectWidth + (DISTRICTFILTER_BoxMargin / 2)),
+        "y": (DISTRICTFILTER_BoxHeight + DISTRICTFILTER_TopMargin + DISTRICTFILTER_BoxMargin),
         "agency": sourceAgencies.filter(item => {return item["id"] == '54';})[0]
     });
 
     //- Southern
     agencyControlData.push({
-        "x": (svgWidth * 0.1),
-        "y": ((DISTRICTFILTER_BoxHeight * 2) + DISTRICTFILTER_TopMargin),
+        "x": (svgWidth * 0.1) - (DISTRICTFILTER_BoxMargin / 2),
+        "y": ((DISTRICTFILTER_BoxHeight * 2) + DISTRICTFILTER_TopMargin + (DISTRICTFILTER_BoxMargin * 2)),
         "agency": sourceAgencies.filter(item => {return item["id"] == '55';})[0]
     });
 
     //- Central
     agencyControlData.push({
-        "x": ((svgWidth * 0.1) + filterRectWidth),
-        "y": ((DISTRICTFILTER_BoxHeight * 2) + DISTRICTFILTER_TopMargin),
+        "x": ((svgWidth * 0.1) + filterRectWidth + (DISTRICTFILTER_BoxMargin / 2)),
+        "y": ((DISTRICTFILTER_BoxHeight * 2) + DISTRICTFILTER_TopMargin + (DISTRICTFILTER_BoxMargin * 2) ),
         "agency": sourceAgencies.filter(item => {return item["id"] == '56';})[0]
     });
 
@@ -207,19 +207,55 @@ function prepareDistrictData(sourceAgencies, svgWidth, filterRectWidth){
 
 
 function districtFilterClick(){
+    /* User clicks the district; update the styling to showcase that it is selected and update the rest of the charts
+
+    Accepts : nothing
+
+    Returns : undefined
+    */
 
     console.log("-> districtFilterClick");
 
-    this
+
+    //- Unselect All Districts
+    d3.selectAll("rect")
+        .attr("class", DISTRICTFILTER_UnselectedClass);
+
+
+    //- Update Style
+    d3.select(this).attr("class", DISTRICTFILTER_SelectedClass);
+
+
+    //- Update Charts
+    updateSelectedAgency(d3.select(this).attr("agencyid"));
 }
 
 
 function districtFilterMouseOver(){
-    d3.select(this).attr("class", "districtFilterRectangleMouseOver");
+    /* When user moves mouse over district rectangle update the CSS style to provide feedback
+
+    Accepts : nothing
+
+    Returns : undefined
+    */
+
+    if (d3.select(this).attr("class") != DISTRICTFILTER_SelectedClass){
+        d3.select(this).attr("class", DISTRCITFILTER_MouseOverClass);
+    }
 }
 
 function districtFilterMouseOut(){
-    d3.select(this).attr("class", "districtFilterRectangle");
+    /* When user moves mouse out of district rectangle, return the CSS style to the original that does not
+    have the highlight
+
+    Accepts : nothing
+
+    Returns : undefined
+    */
+
+    if (d3.select(this).attr("class") != DISTRICTFILTER_SelectedClass){
+        d3.select(this).attr("class", DISTRICTFILTER_UnselectedClass);
+    }
 }
 
 
