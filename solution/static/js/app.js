@@ -32,6 +32,8 @@ initializeDistrictFilter(testAgencies, 2018, "54");
 initializeDowChart(testAgencyDetails);
 
 initializeTimeDayChart(testAgencyDetails);
+
+initializeMap(testAgencyDetails);
 //---------------------------------------------------
 
 
@@ -68,11 +70,12 @@ function initializeApp(selectedAgencyID, selectedYear){
 
     //         //- Chart: Time of Day
     //         initializeTimeDayChart(selectedAgency);
+
+                // //- Map
+                // initializeMap(selectedAgency);
     //     })
     // });
 }
-
-
 
 
 function updateSelectedAgency(selectedAgencyID){
@@ -133,7 +136,7 @@ function updateSelectedYear(selectedYear){
 
     //- Update District Filter
     //  Distrct filter already has metadata for the different years; just needs to updated.
-
+    updateDistrictFilterYear(_selectedFilter_Year);
 
 
     //- Get Agency Details
@@ -185,7 +188,7 @@ function updateAgencyDetails(sourceAgencyDetails){
     updateTimeDayChart(sourceAgencyDetails);
 
     //- Update Map
-    //TODO: create JS for this
+    updateMap(sourceAgencyDetails);
 }
 
 

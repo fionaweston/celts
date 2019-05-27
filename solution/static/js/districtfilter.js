@@ -244,6 +244,7 @@ function districtFilterMouseOver(){
     }
 }
 
+
 function districtFilterMouseOut(){
     /* When user moves mouse out of district rectangle, return the CSS style to the original that does not
     have the highlight
@@ -267,4 +268,18 @@ function getDistrictFilterDivWidth(){
     */
 
    return parseInt(d3.select(DISTRICTFILTER_DIVNAME).style('width').slice(0, -2));
+}
+
+
+function updateDistrictFilterYear(selectedYear){
+    /* Change the citation count that is being displayed
+
+    Accepts : (int) selected year; update the counts
+
+    Returns : undefined
+    */
+
+    console.log("-> updateDistrictFilterYear");
+
+    //TODO: update based on the year provided
 }
