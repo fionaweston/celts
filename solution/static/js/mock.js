@@ -130,7 +130,7 @@ function getAgencyDetailsMock(agencyID, filterYear){
             { "day": 3, "count": 19912},
             { "day": 4, "count": 22785},
             { "day": 5, "count": 2223},
-            { "day": 5, "count": 10350}
+            { "day": 6, "count": 10350}
         ],
         "summaryhour": [
             { "hour": 0, "count": 0},

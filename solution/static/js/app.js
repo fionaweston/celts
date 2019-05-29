@@ -66,6 +66,7 @@ function initializeApp(selectedAgencyID, selectedYear){
     //         initializeDistrictFilter(agencyData, _selectedFilter_Year, _selectedFilter_AgencyID);
 
     //         //- Chart: DOW
+    
     //         initializeDowChart(selectedAgency);
 
     //         //- Chart: Time of Day
