@@ -42,6 +42,8 @@ function initializeDistrictFilter(sourceAgencies, selectedYear, selectAgencyID){
 
    console.log("--> initializeDistrictFilter");
 
+   console.log(`selectedYear: ${selectedYear}  selectAgencyID: ${selectAgencyID}`);
+
 
    //-- Remove Existing SVG
    //- Get SVG Area
