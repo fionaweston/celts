@@ -15,25 +15,25 @@ var _selectedFilter_AgencyID = "56";   //Current agency being filtered
 // This is temporary while the RESTful endpoints are created
 
 //- Get Mock Data
-let testAgencies = getAgenciesMock();
+// let testAgencies = getAgenciesMock();
 
-console.log("Agencies:");
-console.log(testAgencies);
+// console.log("Agencies:");
+// console.log(testAgencies);
 
-let testAgencyDetails = getAgencyDetailsMock("54", 2018);
+// let testAgencyDetails = getAgencyDetailsMock("54", 2018);
 
-console.log("AgencyDetails:");
-console.log(testAgencyDetails);
+// console.log("AgencyDetails:");
+// console.log(testAgencyDetails);
 
 
-//- Initialize Charts
-initializeDistrictFilter(testAgencies, 2018, "54");
+// //- Initialize Charts
+// initializeDistrictFilter(testAgencies, 2018, "54");
 
-initializeDowChart(testAgencyDetails);
+// initializeDowChart(testAgencyDetails);
 
-initializeTimeDayChart(testAgencyDetails);
+// initializeTimeDayChart(testAgencyDetails);
 
-initializeMap(testAgencyDetails);
+// initializeMap(testAgencyDetails);
 //---------------------------------------------------
 
 
@@ -55,26 +55,26 @@ function initializeApp(selectedAgencyID, selectedYear){
     _selectedFilter_Year = selectedYear;
 
 
-    //TODO: Gets the Agency and AgencyDetails with D3; nested together
-    // d3.json(`agencies`).then(function(agencyData) {
-    //     d3.json(`agencydetails/${_selectedFilter_AgencyID}/${_selectedFilter_Year}`).then(function(selectedAgency) {
+    //- Gets the Agency and AgencyDetails with D3; nested together
+    d3.json(`getAgencies`).then(function(agencyData) {
+        d3.json(`getAgencyDetails/${_selectedFilter_AgencyID}/${_selectedFilter_Year}`).then(function(selectedAgency) {
 
-    //         console.log("-> inintializeApp: Data from endpoints");
+            console.log("-> inintializeApp: Data from endpoints");
 
 
-    //         //- District Filter
-    //         initializeDistrictFilter(agencyData, _selectedFilter_Year, _selectedFilter_AgencyID);
+            //- District Filter
+            initializeDistrictFilter(agencyData, _selectedFilter_Year, _selectedFilter_AgencyID);
 
-    //         //- Chart: DOW
-    //         initializeDowChart(selectedAgency);
+            //- Chart: DOW
+            initializeDowChart(selectedAgency);
 
-    //         //- Chart: Time of Day
-    //         initializeTimeDayChart(selectedAgency);
+            //- Chart: Time of Day
+            initializeTimeDayChart(selectedAgency);
 
-                // //- Map
-                // initializeMap(selectedAgency);
-    //     })
-    // });
+                //- Map
+                initializeMap(selectedAgency);
+        })
+    });
 }
 
 
@@ -100,15 +100,14 @@ function updateSelectedAgency(selectedAgencyID){
 
 
     //- Get Agency Details
-    //TODO: update the call to endpoint; update URL and call the updateAgencyDetails method
-    //d3.json(`agencydetails/${_selectedFilter_AgencyID}/${_selectedFilter_Year}`).then(updateAgencyDetails(results));
-
+    d3.json(`getAgencyDetails/${_selectedFilter_AgencyID}/${_selectedFilter_Year}`).then(function(result) {
+        updateAgencyDetails(result);});
 
 
     //---> MOCK
-    let mockAgencyDetails = getAgencyDetailsMock(_selectedFilter_AgencyID, _selectedFilter_Year);
+    // let mockAgencyDetails = getAgencyDetailsMock(_selectedFilter_AgencyID, _selectedFilter_Year);
 
-    updateAgencyDetails(mockAgencyDetails);
+    // updateAgencyDetails(mockAgencyDetails);
     //---< End of Mock
 }
 
@@ -140,16 +139,14 @@ function updateSelectedYear(selectedYear){
 
 
     //- Get Agency Details
-    // d3.json(`agencydetails/${_selectedFilter_AgencyID}/${_selectedFilter_Year}`).then(function(sourceAgencyDetails){
-    //     //TODO: change the URL to one built and move code from below in here.
-    // });
-
+    d3.json(`getAgencyDetails/${_selectedFilter_AgencyID}/${_selectedFilter_Year}`).then(function(result) {
+        updateAgencyDetails(result);});
 
 
     //---> MOCK
-    let mockAgencyDetails = getAgencyDetailsMock(_selectedFilter_AgencyID, _selectedFilter_Year);
+    // let mockAgencyDetails = getAgencyDetailsMock(_selectedFilter_AgencyID, _selectedFilter_Year);
 
-    updateAgencyDetails(mockAgencyDetails);
+    // updateAgencyDetails(mockAgencyDetails);
     //---< End of Mock
 
 }
@@ -212,5 +209,5 @@ d3.select(window).on("resize",makeResponsiveLayout);
 
 
 //- Initialize Application
-initializeApp("53", 2018);
+initializeApp("53", 2015);
 
