@@ -40,7 +40,24 @@ function initializeMap(sourceAgencyDetails){
     center: [-118.353650, 34.113055], // starting position [lng, lat]
     zoom: 9 // starting zoom
     });
-    console.log(map);
+    console.log("checking map api object")
+    
+    
+    sourceAgencyDetails.meters.forEach(i=>{
+        var marker = new mapboxgl.Marker({
+        
+        })
+        .setLngLat([i.longitude,i.latitude]).addTo(map);
+    
+    
+    
+    })
+    // var marker = new mapboxgl.Marker({
+    //     draggable: true
+    //     })
+    //     .setLngLat([0, 0])
+    //     .addTo(map);
+    
     // 34.113055, -118.353650
 
 }
