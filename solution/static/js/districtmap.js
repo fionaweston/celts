@@ -30,9 +30,18 @@ function initializeMap(sourceAgencyDetails){
 
     console.log("--> initializeMap");
 
-    let mapDiv = d3.select("#map");
+    // let mapDiv = d3.select("#map");
 
-    console.log(mapDiv);
+    // console.log(mapDiv);
+    mapboxgl.accessToken = API_KEY;
+    var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+    center: [-118.353650, 34.113055], // starting position [lng, lat]
+    zoom: 9 // starting zoom
+    });
+    console.log(map);
+    // 34.113055, -118.353650
 
 }
 
