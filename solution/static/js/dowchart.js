@@ -3,7 +3,7 @@ Contains functionality to power the Day Of Week bar chart
 */
 
 
-console.log("--> dowchart.js");
+console.log("--> dowchart.js 1");
 
 
 
@@ -53,7 +53,7 @@ function initializeDowChart(sourceAgencyDetails){
     var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
     
     // Select body, append SVG area to it, and set the dimensions
-    var svg = d3.select("body")
+    var svg = d3.select("#dowChart")
       .append("svg")
       .attr("height", svgHeight)
       .attr("width", svgWidth);
