@@ -3,7 +3,7 @@ Contains functionality to power the Time of Day chart
 */
 
 
-console.log("--> timedaychart.js");
+console.log("--> timedaychart.js 1");
 
 
 
@@ -51,7 +51,7 @@ function initializeTimeDayChart(sourceAgencyDetails){
     var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
     
     // Select body, append SVG area to it, and set the dimensions
-    var svg = d3.select("body")
+    var svg = d3.select("#timeChart")
       .append("svg")
       .attr("height", svgHeight)
       .attr("width", svgWidth);
