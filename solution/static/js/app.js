@@ -65,14 +65,8 @@ function initializeApp(selectedAgencyID, selectedYear){
             //- District Filter
             initializeDistrictFilter(agencyData, _selectedFilter_Year, _selectedFilter_AgencyID);
 
-<<<<<<< HEAD
             //- Chart: DOW
             initializeDowChart(selectedAgency);
-=======
-    //         //- Chart: DOW
-    
-    //         initializeDowChart(selectedAgency);
->>>>>>> 9b7621dc827466aa86ddd8597907de215b0375be
 
             //- Chart: Time of Day
             initializeTimeDayChart(selectedAgency);
