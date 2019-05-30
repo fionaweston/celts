@@ -39,3 +39,12 @@ Text used with the count of citations within the district */
     font-size: 22px;
     pointer-events: none;
 }
+
+.bar {
+    fill: orange;
+  }
+  
+  .bar:hover {
+    fill: green;
+  }
+  
