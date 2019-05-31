@@ -171,17 +171,6 @@ function makeResponsiveLayout(){
 
 }
 
-function getDivWidth(divName){
-    /* Returns the width, in pixels, of the div.
-
-    Accepts : divName (string) name of the div, example "#yearfilter"
-
-    returns : (int) current width of the div; in pixels
-    */
-
-   return parseInt(d3.select(divName).style('width').slice(0, -2));
-}
-
 
 //> --- MOCK
 //- Meter Selection
@@ -205,7 +194,7 @@ function mockMeterClick(){
 
         console.log(meterData);
 
-        updateMeterMetadata(meterData, `The location ${_mockMeterIDs[_mockMeterIndex]}`);
+        updateMeterMetadata(meterData, `The location ${_mockMeterIDs[_mockMeterIndex]}`, 34);
     });
 
 

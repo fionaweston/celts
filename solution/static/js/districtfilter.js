@@ -47,13 +47,7 @@ function initializeDistrictFilter(sourceAgencies, selectedYear, selectAgencyID){
 
 
    //-- Remove Existing SVG
-   //- Get SVG Area
-   let svgArea = d3.select(DISTRICTFILTER_DIVNAME).select('svg');
-
-    //- Remove Existing
-    if (!svgArea.empty()){
-        svgArea.remove();
-    }
+   removeExistingSvg(DISTRICTFILTER_DIVNAME);
 
     
     //- Get Width & Height of SVG
