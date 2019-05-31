@@ -22,7 +22,8 @@ const DISTRCITFILTER_MouseOverClass = "districtFilterRectangleMouseOver"; // nam
 const DISTRICTFILTER_UnselectedClass = "districtFilterRectangle"; // name of CSS class for standard rectangle
 
 
-
+//- Globals
+var _svgCountLabelGroup = null; //Reference to the label group that contains the count; set during initialization
 
 
 function initializeDistrictFilter(sourceAgencies, selectedYear, selectAgencyID){
@@ -55,8 +56,8 @@ function initializeDistrictFilter(sourceAgencies, selectedYear, selectAgencyID){
     }
 
     
-    //- Get Width
-    let svgWidth = getDistrictFilterDivWidth();
+    //- Get Width & Height of SVG
+    let svgWidth = getDivWidth(DISTRICTFILTER_DIVNAME);
 
     let svgHeight = ((DISTRICTFILTER_BoxHeight * 3) + (DISTRICTFILTER_TopMargin * 2) + (DISTRICTFILTER_BoxMargin * 2));
 
@@ -67,7 +68,7 @@ function initializeDistrictFilter(sourceAgencies, selectedYear, selectAgencyID){
         .attr("width", svgWidth);
 
 
-    //-
+    //- Determine Width of Box
     let filterBoxWidth = (svgWidth * 0.4) - DISTRICTFILTER_BoxMargin;
 
     //- Prepare Data
@@ -101,7 +102,7 @@ function initializeDistrictFilter(sourceAgencies, selectedYear, selectAgencyID){
     //- Create Label Text
     let svgLabelGroup = svgContainer.append("g");
 
-    let districtText = svgLabelGroup.selectAll("Text")
+    let districtText = svgLabelGroup.selectAll("text")
                             .data(filterData)
                             .enter()
                             .append("text")
@@ -109,21 +110,21 @@ function initializeDistrictFilter(sourceAgencies, selectedYear, selectAgencyID){
                             .attr("y", item => (item["y"] + (DISTRICTFILTER_BoxHeight /2) - 6 ))
                             .attr("class", "districtFilterLabelText")
                             .attr("text-anchor", "middle")
-                            .attr("fill", "black")
                             .text(item => item["agency"]["name"]);
 
     
     //- Create Count Text
     let svgCountLabelGroup = svgContainer.append("g");
 
-    let countText = svgCountLabelGroup.selectAll("Text")
+    _svgCountLabelGroup = svgCountLabelGroup;
+
+    let countText = svgCountLabelGroup.selectAll("text")
                             .data(filterData)
                             .enter()
                             .append("text")
                             .attr("x", item => (item["x"] + (filterBoxWidth / 2) ))
                             .attr("y", item => (item["y"] + (DISTRICTFILTER_BoxHeight /2) + 19 ))
                             .attr("text-anchor", "middle")
-                            .attr("fill", "black")
                             .attr("class", "districtFilterCountText")
                             .text(item => getDistrictCountForYear(item, selectedYear));
                             
@@ -161,7 +162,7 @@ function prepareDistrictData(sourceAgencies, svgWidth, filterRectWidth){
     Returns : agencyControlData (list) contains the information to build the control
                 agency: (dictionary) source agency information from endpoint
                 x: (number) x location to start the rectangle
-                y: (number) y location to start rectangel
+                y: (number) y location to start rectangle
     */
 
     console.log("-> prepareDistrictData");
@@ -220,7 +221,7 @@ function districtFilterClick(){
 
 
     //- Unselect All Districts
-    d3.selectAll("rect")
+    d3.select(DISTRICTFILTER_DIVNAME).selectAll("rect")
         .attr("class", DISTRICTFILTER_UnselectedClass);
 
 
@@ -262,17 +263,6 @@ function districtFilterMouseOut(){
 }
 
 
-function getDistrictFilterDivWidth(){
-    /* Returns the width, in pixels, of the div that contains the SVG of the control. This div
-    that is column within a Bootstrap grid, resizes bases on the size of the browser.
-    Accepts : nothing
-    returns : (int) current width of the div; in pixels
-    */
-
-   return parseInt(d3.select(DISTRICTFILTER_DIVNAME).style('width').slice(0, -2));
-}
-
-
 function updateDistrictFilterYear(selectedYear){
     /* Change the citation count that is being displayed
 
@@ -283,5 +273,6 @@ function updateDistrictFilterYear(selectedYear){
 
     console.log("-> updateDistrictFilterYear");
 
-    //TODO: update based on the year provided
+    _svgCountLabelGroup.selectAll("text")
+            .text(item => getDistrictCountForYear(item, selectedYear));
 }

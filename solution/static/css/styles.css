@@ -28,6 +28,7 @@ Text used with the name of the district */
 .districtFilterLabelText {
     font-family: sans-serif;
     font-size: 15px;
+    fill: black;
     pointer-events: none;
 }
 
@@ -38,8 +39,44 @@ Text used with the count of citations within the district */
     font-family: sans-serif;
     font-size: 22px;
     pointer-events: none;
+    fill: black;
 }
 
+
+/* Year Filter: Rectangle */
+.yearFilterRectangle {
+    fill: none;
+    stroke: black;
+    stroke-width: 3;
+    pointer-events: all;
+}
+
+.yearFilterRectangleMouseOver {
+    fill: rgba(131, 199, 211, 0.342);
+    stroke: black;
+    stroke-width: 3;
+    pointer-events: all;
+}
+
+.yearFilterRectangleSelected {
+    fill: rgba(91, 174, 230, 0.87);
+    stroke: rgb(66, 68, 230);
+    stroke-width: 7;
+    pointer-events: all;
+}
+
+
+/* Year Filter: Label Text
+Text used with the year */
+.yearFilterLabelText {
+    font-family: sans-serif;
+    font-size: 18px;
+    pointer-events: none;
+    fill: black;
+}
+
+
+/* Charts */
 .bar {
     fill: orange;
   }

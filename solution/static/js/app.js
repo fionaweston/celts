@@ -10,34 +10,6 @@ var _selectedFilter_Year = 2018;    //Current year being filtered
 var _selectedFilter_AgencyID = "56";   //Current agency being filtered
 
 
-//-----------------------------------------------
-//-- Mock Data
-// This is temporary while the RESTful endpoints are created
-
-//- Get Mock Data
-// let testAgencies = getAgenciesMock();
-
-// console.log("Agencies:");
-// console.log(testAgencies);
-
-// let testAgencyDetails = getAgencyDetailsMock("54", 2018);
-
-// console.log("AgencyDetails:");
-// console.log(testAgencyDetails);
-
-
-// //- Initialize Charts
-// initializeDistrictFilter(testAgencies, 2018, "54");
-
-// initializeDowChart(testAgencyDetails);
-
-// initializeTimeDayChart(testAgencyDetails);
-
-// initializeMap(testAgencyDetails);
-//---------------------------------------------------
-
-
-
 function initializeApp(selectedAgencyID, selectedYear){
     /* Gets data from the endpoints based on the variables provided and then updates the visualizations.
 
@@ -62,8 +34,11 @@ function initializeApp(selectedAgencyID, selectedYear){
             console.log("-> inintializeApp: Data from endpoints");
 
 
-            //- District Filter
+            //- Filter: District
             initializeDistrictFilter(agencyData, _selectedFilter_Year, _selectedFilter_AgencyID);
+
+            //- Filter: Year
+            initializeYearFilter(agencyData, _selectedFilter_Year);
 
             //- Chart: DOW
             initializeDowChart(selectedAgency);
@@ -102,17 +77,10 @@ function updateSelectedAgency(selectedAgencyID){
     //- Get Agency Details
     d3.json(`getAgencyDetails/${_selectedFilter_AgencyID}/${_selectedFilter_Year}`).then(function(result) {
         updateAgencyDetails(result);});
-
-
-    //---> MOCK
-    // let mockAgencyDetails = getAgencyDetailsMock(_selectedFilter_AgencyID, _selectedFilter_Year);
-
-    // updateAgencyDetails(mockAgencyDetails);
-    //---< End of Mock
 }
 
 function updateSelectedYear(selectedYear){
-    /*
+    /* User has changed the year filter; get the data from endpoint and update the charts.
 
     Accepts : selectedYear (int) selected year used to filter the charts
 
@@ -141,13 +109,6 @@ function updateSelectedYear(selectedYear){
     //- Get Agency Details
     d3.json(`getAgencyDetails/${_selectedFilter_AgencyID}/${_selectedFilter_Year}`).then(function(result) {
         updateAgencyDetails(result);});
-
-
-    //---> MOCK
-    // let mockAgencyDetails = getAgencyDetailsMock(_selectedFilter_AgencyID, _selectedFilter_Year);
-
-    // updateAgencyDetails(mockAgencyDetails);
-    //---< End of Mock
 
 }
 
@@ -202,6 +163,18 @@ function makeResponsiveLayout(){
     //TODO: update for responsive design
 
 }
+
+function getDivWidth(divName){
+    /* Returns the width, in pixels, of the div.
+
+    Accepts : divName (string) name of the div, example "#yearfilter"
+
+    returns : (int) current width of the div; in pixels
+    */
+
+   return parseInt(d3.select(divName).style('width').slice(0, -2));
+}
+
 
 
 //- Prepare Responsive Layout
