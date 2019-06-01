@@ -76,6 +76,24 @@ Text used with the year */
 }
 
 
+/* Meter Chart */
+.meterBar{
+    fill: orange;
+}
+
+.meterBar:hover {
+    fill: green;
+}
+
+.meterText{
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    pointer-events: none;
+    fill: black;
+}
+
+
 /* Charts */
 .bar {
     fill: orange;
@@ -85,5 +103,7 @@ Text used with the year */
     fill: green;
   }
 
+
+  /* Map */
   #map { position:relative; top:0; bottom:0; width:500px;height:500px; }
   
