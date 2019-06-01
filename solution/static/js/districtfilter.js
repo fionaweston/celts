@@ -77,6 +77,7 @@ function initializeDistrictFilter(sourceAgencies, selectedYear, selectAgencyID){
                             .append("rect")
                             .attr("x", item => item["x"])
                             .attr("y", item => item["y"])
+                            .style("fill", item => getDistrictColor(item["agency"]["id"]))
                             .attr("width", filterBoxWidth)
                             .attr("height", DISTRICTFILTER_BoxHeight)
                             .attr("class", item => {
