@@ -159,7 +159,7 @@ function updateTimeDayChart(sourceAgencyDetails){
     var toddata = sourceAgencyDetails.summaryhour;
 
     // Define SVG area dimensions
-    var svgWidth = 560;
+    var svgWidth = getDivWidth("#timeChart");
     var svgHeight = 360;
     
     // Define the chart's margins as an object

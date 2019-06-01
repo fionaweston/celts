@@ -166,7 +166,7 @@ function updateDowChart(sourceAgencyDetails){
     var dow = [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ]
     
     // Define SVG area dimensions
-    var svgWidth = 560;
+    var svgWidth = getDivWidth("#dowChart");
     var svgHeight = 360;
     
     // Define the chart's margins as an object
@@ -231,12 +231,16 @@ function updateDowChart(sourceAgencyDetails){
       .style("font-weight", 700)
       .style("font-size", "12px")
       .call(leftAxis);
+      .text(Tickets)
+
+      
     
     chartGroup.append("g")
       .attr("transform", `translate(0, ${chartHeight})`)
       .style("font-weight", 700)
       .style("font-size", "12px")
       .call(bottomAxis);
+      .text(Day of week)
     
     // Create one SVG rectangle per piece of dowdata
     // Use the linear and band scales to position each rectangle within the chart
