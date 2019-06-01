@@ -8,7 +8,7 @@
     
         <!-- CSS: Bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+
         <!-- CSS: Application -->
         <link rel="stylesheet" href="static/css/styles.css">
         <link rel="stylesheet" href="static/css/d3Style.css">
@@ -68,7 +68,7 @@
     
     
             <!-- Row: Map -->
-            <div class="row">
+            <div class="row pt-2">
     
                 <!-- Column: Map -->
                 <div class="col-8">
@@ -80,19 +80,20 @@
                 <!-- Column: Metadata -->
                 <div class="col-4">
                     <div id="selectedMeterMetadata">
+                        <div class="text-center font-weight-bold pt-1">Selected Meter Information</div>
                         <table class="table table-borderless table-sm">
                             <tbody>
                                 <tr>
-                                    <td>Meter ID</td>
-                                    <td id="meterMetadataTableID"></td>
+                                    <td class="meterMetadataLabelText">Meter ID</td>
+                                    <td class="meterMetadataValueText" id="meterMetadataTableID"></td>
                                 </tr>
                                 <tr>
-                                    <td>Location</td>
-                                    <td id="meterMetadataTableLocation"></td>
+                                    <td class="meterMetadataLabelText">Location</td>
+                                    <td class="meterMetadataValueText" id="meterMetadataTableLocation"></td>
                                 </tr>
                                 <tr>
-                                    <td>Count</td>
-                                    <td id="meterMetadataTableCitation"></td>
+                                    <td class="meterMetadataLabelText">Count</td>
+                                    <td class="meterMetadataValueText" id="meterMetadataTableCitation"></td>
                                 </tr>
                             </tbody>
                         </table>
