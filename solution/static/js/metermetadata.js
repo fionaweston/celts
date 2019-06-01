@@ -174,4 +174,15 @@ function updateMeterMetadata(sourceMeterDetails, meterLocation, citationCount){
         .attr("x", 10)
         .attr("y", d => (yScale(d.vehiclemake) + 22))
         .text(d => `${d.vehiclemake}: ${d.count}`);
+
+
+    //- X Axis label
+    let axisLabelGroup = svgChartGroup.append("g");
+
+    axisLabelGroup.append("text")
+        .attr("transform", `translate(${svgWidth/2}, ${METADATA_SvgHeight + METADATA_TopMargin - 10})`)
+        .style("text-anchor", "middle")
+        .attr("class", "meterAxisText")
+        .text("Vehicle Count");
+
 }

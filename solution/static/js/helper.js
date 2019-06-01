@@ -38,7 +38,7 @@ function removeExistingSvg(divName){
 }
 
 function getDistrictColor(districtID){
-    /*
+    /* Returns the color to use for the district based on the ID
 
     Accepts : districtID (string) unique identifier for the district
                     53 - Valley
