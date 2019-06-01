@@ -37,7 +37,7 @@ function initializeDowChart(sourceAgencyDetails){
     var dow = [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ]
     
     // Define SVG area dimensions
-    var svgWidth = 560;
+    var svgWidth = getDivWidth("#dowChart");
     var svgHeight = 360;
     
     // Define the chart's margins as an object
