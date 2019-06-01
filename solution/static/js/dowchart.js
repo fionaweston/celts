@@ -230,8 +230,8 @@ function updateDowChart(sourceAgencyDetails){
     chartGroup.append("g")
       .style("font-weight", 700)
       .style("font-size", "12px")
-      .call(leftAxis);
-      .text(Tickets)
+      .call(leftAxis)
+      .text("Tickets");
 
       
     
@@ -239,8 +239,8 @@ function updateDowChart(sourceAgencyDetails){
       .attr("transform", `translate(0, ${chartHeight})`)
       .style("font-weight", 700)
       .style("font-size", "12px")
-      .call(bottomAxis);
-      .text(Day of week)
+      .call(bottomAxis)
+      .text("Day");
     
     // Create one SVG rectangle per piece of dowdata
     // Use the linear and band scales to position each rectangle within the chart
