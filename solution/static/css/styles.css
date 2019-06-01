@@ -2,8 +2,9 @@
 
 /*  District Filter: Rectangle */
 .districtFilterRectangle {
-    fill: none;
-    stroke: black;
+    /* fill: none; */
+    opacity: 0.5;
+    stroke: grey;
     stroke-width: 3;
     pointer-events: all;
 }
