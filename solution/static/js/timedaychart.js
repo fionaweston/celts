@@ -152,4 +152,100 @@ function updateTimeDayChart(sourceAgencyDetails){
     */
 
     console.log("--> updateTimeDayChart");
+
+    removeExistingSvg("#timeChart")
+
+    let chartDiv = d3.select("#timeChart");
+    var toddata = sourceAgencyDetails.summaryhour;
+
+    // Define SVG area dimensions
+    var svgWidth = 560;
+    var svgHeight = 360;
+    
+    // Define the chart's margins as an object
+    var chartMargin = {
+      top: 30,
+      right: 30,
+      bottom: 30,
+      left: 80
+    };
+    
+    // Define dimensions of the chart area
+    var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
+    var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
+    
+    // Select body, append SVG area to it, and set the dimensions
+    var svg = d3.select("#timeChart")
+      .append("svg")
+      .attr("height", svgHeight)
+      .attr("width", svgWidth);
+    
+    // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
+    var chartGroup = svg.append("g")
+      .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
+    
+    // Cast the day of week number and count values to a number for each piece of toddata
+    toddata.forEach(function(d) {
+      d.day = +d.day;
+      d.count = +d.count;
+    });
+    
+    // Configure a band scale for the horizontal axis with a padding of 0.1 (10%)
+    var xBandScale = d3.scaleBand()
+      .domain(toddata.map(d => d.hour))
+      .range([0, chartWidth])
+      .padding(0.1);
+    
+    // Create a linear scale for the vertical axis.
+    var yLinearScale = d3.scaleLinear()
+      .domain([0, d3.max(toddata, d => d.count)])
+      .range([chartHeight, 0]);
+    
+    // Create two new functions passing our scales in as arguments
+    // These will be used to create the chart's axes
+    var bottomAxis = d3.axisBottom(xBandScale);
+    //                   .tickFormat((d,i) => dow[i]);
+    var leftAxis = d3.axisLeft(yLinearScale).ticks(10);
+    
+    // initialize tool tip
+    var toolTip = d3.tip()
+                    .attr("class", "d3-tip")
+                    .offset([40, 0])
+                    .html(function(d) {
+                        return ("<div>" + d.count + "</div>");
+                    });
+    
+    // create tooltip in the chart
+    chartGroup.call(toolTip);
+    
+    // Append two SVG group elements to the chartGroup area,
+    // and create the bottom and left axes inside of them
+    chartGroup.append("g")
+      .style("font-weight", 700)
+      .style("font-size", "12px")
+      .call(leftAxis);
+    
+    chartGroup.append("g")
+      .attr("transform", `translate(0, ${chartHeight})`)
+      .style("font-weight", 700)
+      .style("font-size", "12px")
+      .call(bottomAxis);
+    
+    // Create one SVG rectangle per piece of toddata
+    // Use the linear and band scales to position each rectangle within the chart
+    chartGroup.selectAll(".bar")
+      .data(toddata)
+      .enter()
+      .append("rect")
+      .attr("class", "bar")
+      .attr("x", d => xBandScale(d.hour))
+      .attr("y", d => yLinearScale(d.count))
+      .attr("width", xBandScale.bandwidth())
+      .attr("height", d => chartHeight - yLinearScale(d.count))
+      .on("mouseover", function(d) {
+            toolTip.show(d,this);
+      })
+      .on("mouseout", function(d) {
+            toolTip.hide(d);
+      });
 }

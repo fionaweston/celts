@@ -43,11 +43,7 @@ function initializeYearFilter(sourceAgencies, selectedYear){
 
 
     //- Remove Existing SVG
-    let svgArea = d3.select(YEARFILTER_DivName).select("svg");
-
-    if (!svgArea.empty()){
-        svgArea.remove();
-    }
+    removeExistingSvg(YEARFILTER_DivName);
 
 
     //- Get Width & Height of SVG
