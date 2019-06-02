@@ -2,8 +2,9 @@
 
 /*  District Filter: Rectangle */
 .districtFilterRectangle {
-    fill: none;
-    stroke: black;
+    /* fill: none; */
+    opacity: 0.5;
+    stroke: grey;
     stroke-width: 3;
     pointer-events: all;
 }
@@ -89,6 +90,30 @@ Text used with the year */
     font-family: sans-serif;
     font-size: 18px;
     font-weight: bold;
+    pointer-events: none;
+    fill: black;
+}
+
+.meterAxisText{
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    pointer-events: none;
+    fill: black;
+}
+
+.meterMetadataLabelText{
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    pointer-events: none;
+    fill: black;
+}
+
+.meterMetadataValueText{
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: normal;
     pointer-events: none;
     fill: black;
 }

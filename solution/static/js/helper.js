@@ -36,3 +36,37 @@ function removeExistingSvg(divName){
        svgArea.remove();
    }
 }
+
+function getDistrictColor(districtID){
+    /* Returns the color to use for the district based on the ID
+
+    Accepts : districtID (string) unique identifier for the district
+                    53 - Valley
+                    51 - Western
+                    54 - Hollywood
+                    55 - Southern
+                    56 - Central
+    Returns : (string) color
+    */
+
+    console.log("--> getDistrictColor");
+
+    if (districtID == "53"){
+        return "green";
+    }
+    else if (districtID == "51"){
+        return "yellow";
+    }
+    else if (districtID == "54"){
+        return "purple";
+    }
+    else if (districtID == "55"){
+        return "blue";
+    }
+    else if (districtID == "56"){
+        return "red";
+    }
+    else{
+        return "pink";
+    }
+}
