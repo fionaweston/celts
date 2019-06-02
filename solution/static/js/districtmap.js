@@ -21,8 +21,12 @@ function chooseColor(district) {
 
 
 function initializeMap(sourceAgencyDetails){
+
+    console.log("--source agency details");
+    console.log(sourceAgencyDetails);
     
     // console.log(mapDiv);
+    
     mapboxgl.accessToken = API_KEY;
     var map = new mapboxgl.Map({
     container: 'map', // container id
@@ -33,17 +37,52 @@ function initializeMap(sourceAgencyDetails){
     });
     
     
-    
-    sourceAgencyDetails.meters.forEach(meter=>{
-        var marker = new mapboxgl.Marker({
-        
-        })
-        .setLngLat([meter.longitude,meter.latitude]).addTo(map);    
-    
-    
-    })
+    var meter_array=[];
 
+
+    sourceAgencyDetails.meters.forEach(meter=>{
+        var meter_obj={"type":"Feature",
+        "geometry":{"type":"Point","coordinates":[meter.longitude,meter.latitude]},
+        "properties":{"id":meter.id}};
+        meter_array.push(meter_obj);
+        
+        
+    })
+    
+
+    
+        meter_array.forEach(function(marker) {
+            // create a DOM element for the marker
+            
+            var el = document.createElement('div');
+            el.className = 'marker';
+            el.id=marker.properties.id;
+            el.style.backgroundImage = 'url(static/data/marker.png)';
+            el.style.width = '64px';
+            el.style.height = '64px';
+            
+            el.addEventListener('click', function(e) {
+                
+            //- Call Endpoint
+                d3.json(`getMeterDetails/${e.path[0].id}/${_selectedFilter_Year}`).then(function(meterData) {
+                    
+                    var summarycount=0;
+                    meterData.summarymake.forEach(make=>{summarycount+=make.count;})
+                    updateMeterMetadata(meterData, `The location ${e.path[0].id}`, summarycount);
+                });
+            });
+             
+            // add marker to map
+            new mapboxgl.Marker(el)
+            .setLngLat(marker.geometry.coordinates)
+            .addTo(map);
+            });
+
+    
+    
     map.on('load', function () {
+        
+
         d3.json("static/data/boundaries.geojson").then(gj=>gj.features.forEach(district=>{
             
             map.addLayer({
@@ -63,7 +102,7 @@ function initializeMap(sourceAgencyDetails){
 
         }));
     });
-    
+
 }
  
         
@@ -81,18 +120,49 @@ function updateMap(sourceAgencyDetails){
     // -118.353650, 34.113055
     zoom: 8.7 // starting zoom
     });
-    console.log("checking map api object")
     
     
+    var meter_array=[];
+
+
     sourceAgencyDetails.meters.forEach(meter=>{
-        var marker = new mapboxgl.Marker({
+        var meter_obj={"type":"Feature",
+        "geometry":{"type":"Point","coordinates":[meter.longitude,meter.latitude]},
+        "properties":{"id":meter.id}};
+        meter_array.push(meter_obj);
         
-        })
-        .setLngLat([meter.longitude,meter.latitude]).addTo(map);
-    
-    
-    
+        
     })
+    
+
+    
+        meter_array.forEach(function(marker) {
+            // create a DOM element for the marker
+            
+            var el = document.createElement('div');
+            el.className = 'marker';
+            el.id=marker.properties.id;
+            el.style.backgroundImage = 'url(static/data/marker.png)';
+            el.style.width = '64px';
+            el.style.height = '64px';
+            
+            el.addEventListener('click', function(e) {
+                
+            //- Call Endpoint
+                d3.json(`getMeterDetails/${e.path[0].id}/${_selectedFilter_Year}`).then(function(meterData) {
+                    
+                    var summarycount=0;
+                    meterData.summarymake.forEach(make=>{summarycount+=make.count;})
+                    updateMeterMetadata(meterData, `The location ${e.path[0].id}`, summarycount);
+                });
+            });
+             
+            // add marker to map
+            new mapboxgl.Marker(el)
+            .setLngLat(marker.geometry.coordinates)
+            .addTo(map);
+            });
+
 
     map.on('load', function () {
         d3.json("static/data/boundaries.geojson").then(gj=>gj.features.forEach(district=>{
@@ -114,5 +184,6 @@ function updateMap(sourceAgencyDetails){
 
         }));
     });
+    
 }
 
