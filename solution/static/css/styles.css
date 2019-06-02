@@ -17,9 +17,9 @@
 }
 
 .districtFilterRectangleSelected {
-    fill: rgba(91, 174, 230, 0.87);
-    stroke: rgb(66, 68, 230);
-    stroke-width: 7;
+    /* fill: rgba(91, 174, 230, 0.87); */
+    stroke: rgb(64, 218, 230);
+    stroke-width: 9;
     pointer-events: all;
 }
 
@@ -60,9 +60,9 @@ Text used with the count of citations within the district */
 }
 
 .yearFilterRectangleSelected {
-    fill: rgba(91, 174, 230, 0.87);
-    stroke: rgb(66, 68, 230);
-    stroke-width: 7;
+    fill: rgba(250, 252, 253, 0.87);
+    stroke: rgb(64, 218, 230);;
+    stroke-width: 9;
     pointer-events: all;
 }
 
@@ -88,7 +88,7 @@ Text used with the year */
 
 .meterText{
     font-family: sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     pointer-events: none;
     fill: black;
