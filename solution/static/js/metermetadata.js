@@ -60,7 +60,7 @@ function clearMeterMetadata(){
     //- Clear Metadata
     d3.select(METADATA_TableMeterID).text("");
 
-    d3.select(METADATA_TableLocation).text("");
+    // d3.select(METADATA_TableLocation).text("");
 
     d3.select(METADATA_TableCitations).text("");
 
@@ -89,7 +89,7 @@ function updateMeterMetadata(sourceMeterDetails, meterLocation, citationCount){
     //- Update Metadata
     d3.select(METADATA_TableMeterID).text(sourceMeterDetails.id);
 
-    d3.select(METADATA_TableLocation).text(meterLocation);
+    // d3.select(METADATA_TableLocation).text(meterLocation);
 
     d3.select(METADATA_TableCitations).text(citationCount.toLocaleString());
 
