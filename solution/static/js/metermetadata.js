@@ -9,7 +9,7 @@ console.log("--> metermetadata.js");
 //- Constants
 const METADATA_DivName = "#mapMetadata"; //name of div to host the SVG
 
-const METADATA_SvgHeight = 400; //Height of the SVG; should match map
+const METADATA_SvgHeight = 440; //Height of the SVG; should match map
 
 const METADATA_TopMargin = 5;//Margin at the top of the SVG
 
