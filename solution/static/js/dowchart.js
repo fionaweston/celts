@@ -166,7 +166,7 @@ function drawDowChart(sourceAgencyDetails){
     let axisLabelGroup = chartGroup.append("g");
 
     axisLabelGroup.append("text")
-        .attr("transform", `translate(${svgWidth/2}, ${svgHeight + chartMargin.top - 80})`)
+        .attr("transform", `translate(${svgWidth/2}, ${svgHeight + chartMargin.top - 100})`)
         .style("text-anchor", "middle")
         .attr("class", "meterAxisText")
         .text("Day Of Week");
