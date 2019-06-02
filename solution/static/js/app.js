@@ -174,39 +174,39 @@ function makeResponsiveLayout(){
 
 //> --- MOCK
 //- Meter Selection
-var _mockMeterIDs = [ "VN685A", "V6125", "WP8203", "BW124"]
-var _mockMeterIndex = 0;
+// var _mockMeterIDs = [ "VN685A", "V6125", "WP8203", "BW124"]
+// var _mockMeterIndex = 0;
 
 
-function mockMeterClick(){
-    /* Calls the endpoint to get information 
+// function mockMeterClick(){
+//     /* Calls the endpoint to get information 
 
-    Accepts : nothing
+//     Accepts : nothing
 
-    Returns : undefined
-    */
+//     Returns : undefined
+//     */
 
-    console.log("--> mockMeterClick");
-
-
-    //- Call Endpoint
-    d3.json(`getMeterDetails/${_mockMeterIDs[_mockMeterIndex]}/${_selectedFilter_Year}`).then(function(meterData) {
-
-        console.log(meterData);
-
-        updateMeterMetadata(meterData, `The location ${_mockMeterIDs[_mockMeterIndex]}`, 34);
-    });
+//     console.log("--> mockMeterClick");
 
 
-    //- Prepare Next Meter ID
-    _mockMeterIndex += 1;
+//     //- Call Endpoint
+//     d3.json(`getMeterDetails/${_mockMeterIDs[_mockMeterIndex]}/${_selectedFilter_Year}`).then(function(meterData) {
 
-    if (_mockMeterIndex > 3){
-        _mockMeterIndex = 0;
-    }
-};
+//         console.log(meterData);
 
-d3.select("#mockmeter").on("click", mockMeterClick);
+//         updateMeterMetadata(meterData, `The location ${_mockMeterIDs[_mockMeterIndex]}`, 34);
+//     });
+
+
+//     //- Prepare Next Meter ID
+//     _mockMeterIndex += 1;
+
+//     if (_mockMeterIndex > 3){
+//         _mockMeterIndex = 0;
+//     }
+// };
+
+// d3.select("#mockmeter").on("click", mockMeterClick);
 //<--- Mock
 
 
