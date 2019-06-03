@@ -36,7 +36,7 @@ function initializeDowChart(sourceAgencyDetails){
 
 
 function drawDowChart(sourceAgencyDetails){
-/* Creates the day of week chart.
+    /* Creates the day of week chart.
 
     Accepts : sourceAgencyDetails (dictionary) contains metadata for selected agency used to populate chart
                 id: (string) unique identifier for the agency the details are for
@@ -59,9 +59,8 @@ function drawDowChart(sourceAgencyDetails){
 
    console.log("--> initializeDowChart");
 
-
-  //- Remove Existing
-  removeExistingSvg("#dowChart");
+   //- Remove Existing
+   removeExistingSvg("#dowChart");
 
    let chartDiv = d3.select("#dowChart");
 
@@ -159,19 +158,34 @@ function drawDowChart(sourceAgencyDetails){
            toolTip.hide(d);
      });
 
-   console.log(chartDiv);
-
+   
 
      //- X Axis label
-    let axisLabelGroup = chartGroup.append("g");
+    let XaxisLabelGroup = chartGroup.append("g");
 
-    axisLabelGroup.append("text")
-        .attr("transform", `translate(${svgWidth/2}, ${svgHeight + chartMargin.top - 100})`)
+    XaxisLabelGroup.append("text")
+        .attr("transform", `translate(${svgWidth/2.6}, ${svgHeight + chartMargin.top - 70})`)
         .style("text-anchor", "middle")
+        .style("font-weight", 700)
+        .style("font-size", "14px")
         .attr("class", "meterAxisText")
         .text("Day Of Week");
 
+    //- Y Axis label
+    let YaxisLabelGroup = chartGroup.append("g");
 
+    YaxisLabelGroup.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - chartMargin.left)
+        .attr("x", 0 - (svgHeight / 2.6))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .style("font-weight", 700)
+        .style("font-size", "14px")
+        .attr("class", "meterAxisText")
+        .text("Number of Citations");
+
+    console.log(chartDiv);
 
 }
 
